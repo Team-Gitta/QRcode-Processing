@@ -1,6 +1,13 @@
 import cv2
+import argparse
+
+parser = argparse.ArgumentParser(description='image file name')
+parser.add_argument('--filename',type=str, help='image file name')
+args = parser.parse_args()
+filename =args.filename
+print(filename)
 # read the QRCODE image
-img = cv2.imread("site.png")
+img = cv2.imread(filename)
 
 # initialize the cv2 QRCode detector
 detector = cv2.QRCodeDetector()
