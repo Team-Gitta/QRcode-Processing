@@ -35,17 +35,30 @@ while True:
             if data:
                 print("[+] QR Code detected, data:", data)
                 if data == 'seoo':
-                    start = time.time()
+                    detected_time = time.time()
                     key = '8'
                     ser.write(key)
                     while 1:
-                        now = time.time()
-                        if now > start+5:
+                        pump_time = time.time()
+                        if pump_time > detected_time+4:
                             key = '7'
                             ser.write(key)
                             break
+                    while 1:
+                        pump_stop_time = time.time()
+                        if pump_stop_time > detected_time+10:
+                            key = '6'
+                            ser.write(key)
+                            break
+                    while 1:
+                        return_time = time.time()
+                        if return_time > detected_time + 13:
+                            key = '5'
+                            ser.write(key)
+                            break
+
                     break
-        # display the result
+        #display the result
         #cv2.imshow("img", img)    
         #if cv2.waitKey(1) == ord("q"):
             # break
